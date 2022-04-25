@@ -30,3 +30,27 @@ function updateCart(id) {
     // inform user that item is successfully added - PS: I shouldn't use alert but used informative purposes only
     window.alert("Item successfully added to the cart!")
 }
+
+// Integrate sandbox API
+const url = 'https://api.sandbox.blackcrow.ai/v1/events'
+
+// Because of limited information and time I didn't add anything extra props to the data below
+const data = {
+    site_name: 'BLACKCROW',
+    page_id: document.getElementById('items') ? 'other' : 'home',
+    visitor_id: 'aid88w5jfnRdMVdwbJm4f'
+}
+
+function postData(event) {
+    fetch(url + `/${event}`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+    // with the same reason above I only logged the response in the console and didn't use it
+    .then((response) => console.log(response))
+}
+// Since there is only one event exist in the test scenarios I harded coded event_name as view below.
+postData('view');
